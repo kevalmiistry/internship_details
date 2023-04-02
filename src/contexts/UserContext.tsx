@@ -5,7 +5,6 @@ import { auth } from '../config/auth'
 type TUserContext = {
     userData: TUserData | null
     setUserData: React.Dispatch<React.SetStateAction<TUserData | null>>
-    firebaseLogout: () => void
 }
 
 type TUserData = {
@@ -19,11 +18,7 @@ const UserContext = createContext<TUserContext>({} as TUserContext)
 export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [userData, setUserData] = useState<TUserData | null>(null)
 
-    const firebaseLogout = async () => {
-        await signOut(auth)
-    }
-
-    const values = { userData, setUserData, firebaseLogout }
+    const values = { userData, setUserData }
     return (
         <UserContext.Provider value={values}>{children}</UserContext.Provider>
     )

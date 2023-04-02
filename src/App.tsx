@@ -6,6 +6,7 @@ import Auth from './components/Auth'
 import PrivateRoute from './components/PrivateRoute'
 import Home from './components/Home'
 import { UserProvider } from './contexts/UserContext'
+import Profile from './components/Profile'
 
 type TProp = {}
 const App: FC<TProp> = () => {
@@ -35,6 +36,14 @@ const App: FC<TProp> = () => {
                             element={
                                 <PrivateRoute>
                                     <Home />
+                                </PrivateRoute>
+                            }
+                        />
+                        <Route
+                            path="/profile"
+                            element={
+                                <PrivateRoute>
+                                    <Profile />
                                 </PrivateRoute>
                             }
                         />
