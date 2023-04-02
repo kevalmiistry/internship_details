@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { auth, provider } from './config/auth'
+import { auth, provider } from './config/firebase'
 import { getIdTokenResult, signOut } from 'firebase/auth'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Auth from './components/Auth'

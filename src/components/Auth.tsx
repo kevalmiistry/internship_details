@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react'
 import { signInWithPopup } from 'firebase/auth'
-import { auth, provider } from '../config/auth'
+import { auth, provider } from '../config/firebase'
 import { useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
 import { getUserState } from '../contexts/UserContext'
@@ -39,10 +39,21 @@ const Auth: FC<TProp> = () => {
 
     return (
         <div className="container flex-center">
-            <button className="flex-center" onClick={handleLogin}>
-                <FcGoogle />
-                &nbsp; Login with Google
-            </button>
+            <div>
+                <p
+                    style={{
+                        fontSize: '1.5rem',
+                        fontWeight: '500',
+                        marginBottom: '1rem',
+                    }}
+                >
+                    Login kar loude 😃👇
+                </p>
+                <button className="flex-center" onClick={handleLogin}>
+                    <FcGoogle />
+                    &nbsp; Login with Google
+                </button>
+            </div>
         </div>
     )
 }

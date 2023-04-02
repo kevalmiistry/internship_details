@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { getUserState } from '../contexts/UserContext'
 import { signOut } from 'firebase/auth'
-import { auth } from '../config/auth'
+import { auth } from '../config/firebase'
 import { IoMdLogOut } from 'react-icons/io'
 
 type TProp = {}

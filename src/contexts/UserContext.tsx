@@ -1,6 +1,6 @@
 import { signOut } from 'firebase/auth'
 import { FC, ReactNode, createContext, useContext, useState } from 'react'
-import { auth } from '../config/auth'
+import { auth } from '../config/firebase'
 
 type TUserContext = {
     userData: TUserData | null

@@ -1,6 +1,6 @@
 import { signOut } from 'firebase/auth'
 import { FC, useState } from 'react'
-import { auth } from '../config/auth'
+import { auth } from '../config/firebase'
 import { useNavigate } from 'react-router-dom'
 import { getUserState } from '../contexts/UserContext'
 import Navbar from './Navbar'
