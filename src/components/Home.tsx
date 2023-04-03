@@ -1,24 +1,27 @@
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { getUserState } from '../contexts/UserContext'
-import { db } from '../config/firebase'
 import { collection, getDocs } from 'firebase/firestore'
-import Navbar from './Navbar'
+import { db } from '../config/firebase'
 import InternshipCard from './InternshipCard'
+import Navbar from './Navbar'
 
 const internshipsCollRef = collection(db, 'internships')
 
 type TProp = {}
 const Home: FC<TProp> = () => {
     const { intershipData, setIntershipData } = getUserState()
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         const getInternships = async () => {
+            setLoading(true)
             const data = await getDocs(internshipsCollRef)
             setIntershipData(
                 data.docs.map(
                     (doc) => ({ ...doc.data(), id: doc.id } as TInternshipData)
                 )
             )
+            setLoading(false)
         }
         getInternships()
     }, [])
@@ -27,12 +30,21 @@ const Home: FC<TProp> = () => {
         <>
             <Navbar />
             <div className="container">
-                {intershipData ? (
-                    intershipData?.map((record) => (
-                        <InternshipCard key={record.id} record={record} />
-                    ))
+                {loading ? (
+                    <div style={{ textAlign: 'center' }}>Loading....</div>
                 ) : (
-                    <>No Data at this moment</>
+                    <>
+                        {intershipData ? (
+                            intershipData?.map((record) => (
+                                <InternshipCard
+                                    key={record.id}
+                                    record={record}
+                                />
+                            ))
+                        ) : (
+                            <>No Data at this moment</>
+                        )}
+                    </>
                 )}
             </div>
         </>

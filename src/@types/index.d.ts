@@ -7,4 +7,13 @@ declare interface TInternshipData {
     technologies: string[]
     time_from: string
     time_to: string
+    uid: string
+}
+
+declare interface TUserData {
+    uid: string
+    name: string | null
+    profile_pic: string | null
+    email: string | null
+    internship: boolean
 }

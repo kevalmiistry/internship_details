@@ -9,14 +9,6 @@ type TUserContext = {
     setIntershipData: React.Dispatch<React.SetStateAction<TInternshipData[]>>
 }
 
-type TUserData = {
-    uid: string
-    name: string | null
-    profile_pic: string | null
-    email: string | null
-    internship: boolean
-}
-
 const UserContext = createContext<TUserContext>({} as TUserContext)
 
 export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
