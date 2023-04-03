@@ -1,22 +1,45 @@
 import { FC, useEffect } from 'react'
-import { signInWithPopup } from 'firebase/auth'
-import { auth, provider } from '../config/firebase'
+import { auth, db, provider } from '../config/firebase'
 import { useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
 import { getUserState } from '../contexts/UserContext'
+import { signInWithPopup } from 'firebase/auth'
+// import { doc, setDoc } from 'firebase/firestore'
+import { collection, query, where, getDocs, addDoc } from 'firebase/firestore'
 
 type TProp = {}
 const Auth: FC<TProp> = () => {
     const { setUserData } = getUserState()
     const navigate = useNavigate()
+
     const handleLogin = async () => {
         const result = await signInWithPopup(auth, provider)
+
+        const usersRef = collection(db, 'users')
+        const queryRef = query(usersRef, where('uid', '==', result.user.uid))
+
+        const querySnapshot = await getDocs(queryRef)
+
+        const arr = querySnapshot?.docs?.map((doc) => ({ ...doc.data() }))
+
+        if (arr.length <= 0) {
+            console.log('Entered')
+            await addDoc(usersRef, {
+                uid: result.user.uid,
+                name: result.user.displayName,
+                profile_pic: result.user.photoURL,
+                email: result.user.email,
+                internship: false,
+            })
+        }
+
         if (result) {
             setUserData({
-                name: result.user.displayName,
-                photoURL: result.user.photoURL,
-                email: result.user.email,
                 uid: result.user.uid,
+                name: result.user.displayName,
+                profile_pic: result.user.photoURL,
+                email: result.user.email,
+                internship: false,
             })
             localStorage.setItem(
                 'g-user',
@@ -30,6 +53,7 @@ const Auth: FC<TProp> = () => {
             navigate('/')
         }
     }
+
     useEffect(() => {
         const localUser = localStorage.getItem('g-user')
         if (localUser) {
