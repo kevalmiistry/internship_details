@@ -1,13 +1,13 @@
 declare interface TInternshipData {
     id: string
+    uid: string
     company_name: string
-    experience: string
     internship_title: string
     stipend: number
     technologies: string[]
     time_from: string
     time_to: string
-    uid: string
+    experience: string
 }
 
 declare interface TUserData {

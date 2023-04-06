@@ -1,0 +1,54 @@
+.form_container form {
+    margin-inline: auto;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.add_btn {
+    width: fit-content;
+    background-color: #111;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 400;
+    padding: 0.4rem 0.75rem;
+    height: fit-content;
+}
+
+.tech_input {
+    font-size: 0.95rem;
+    background-color: #fff;
+    border: 1px solid rgb(0, 0, 0, 0.3);
+    border-radius: 0.5rem;
+    padding: 0.35rem 0.85rem;
+    max-width: 120px;
+}
+
+.tech_input_wrapper {
+    margin-right: 1rem;
+    margin-block: 0.5rem;
+    position: relative;
+}
+
+.icon {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.experience {
+    margin-top: 0.25rem;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.75rem;
+}
+
+
+.option {
+    font-size: 1.2rem;
+    padding: 0.8rem 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid red;
+}

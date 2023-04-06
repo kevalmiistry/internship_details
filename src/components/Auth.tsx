@@ -23,7 +23,6 @@ const Auth: FC<TProp> = () => {
         const arr = querySnapshot?.docs?.map((doc) => ({ ...doc.data() }))
 
         if (arr.length <= 0) {
-            console.log('Entered')
             await addDoc(usersRef, {
                 uid: result.user.uid,
                 name: result.user.displayName,
@@ -39,7 +38,7 @@ const Auth: FC<TProp> = () => {
                 name: result.user.displayName,
                 profile_pic: result.user.photoURL,
                 email: result.user.email,
-                internship: false,
+                internship: arr[0].internship,
             })
             localStorage.setItem(
                 'g-user',
@@ -48,6 +47,7 @@ const Auth: FC<TProp> = () => {
                     photoURL: result.user.photoURL,
                     email: result.user.email,
                     uid: result.user.uid,
+                    internship: arr[0].internship,
                 })
             )
             navigate('/')

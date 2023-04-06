@@ -40,6 +40,10 @@ button {
     display: flex;
 }
 
+.items-center {
+    align-items: center;
+}
+
 .flex-center {
     display: flex;
     justify-content: center;
@@ -86,4 +90,20 @@ button {
     color: #333;
     font-size: 1.75rem;
     cursor: pointer;
+}
+
+.form_input {
+    color: #111;
+    border: none;
+    border-radius: 0.75rem;
+    font-size: 1.25rem;
+    padding: 0.65rem 1.5rem;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.1);
+    margin-bottom: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+.form_input:focus {
+    outline: 2px solid rgb(0, 0, 0, 0.5);
 }
