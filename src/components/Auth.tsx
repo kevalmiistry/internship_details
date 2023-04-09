@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
 import { getUserState } from '../contexts/UserContext'
 import { signInWithPopup } from 'firebase/auth'
-// import { doc, setDoc } from 'firebase/firestore'
 import { collection, query, where, getDocs, addDoc } from 'firebase/firestore'
 
 type TProp = {}

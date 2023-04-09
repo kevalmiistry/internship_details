@@ -1,5 +1,5 @@
 declare interface TInternshipData {
-    id: string
+    id?: string
     uid: string
     company_name: string
     internship_title: string
