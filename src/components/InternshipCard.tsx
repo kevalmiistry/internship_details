@@ -3,6 +3,13 @@ import S from './InternshipCard.module.css'
 import { collection, getDocs, query, where } from 'firebase/firestore'
 import { db } from '../config/firebase'
 
+const expMap = {
+    very_good: ' Very Good 🤩',
+    good: 'Good 😀',
+    average: 'Average 🙂',
+    bad: 'Bad 😞',
+    very_bad: 'Very Bad 😖',
+}
 type TProp = {
     record: TInternshipData
 }
@@ -50,20 +57,28 @@ const InternshipCard: FC<TProp> = ({ record }) => {
                 </p>
                 <p className={S.techs}>
                     Techonlogies: <br />
+                    <div className={S.techs_wrapper}>
+                        {record.technologies.length > 0
+                            ? record.technologies.map((item, idx) => (
+                                  <span key={idx} className={S.tech_item}>
+                                      {item}
+                                  </span>
+                              ))
+                            : 'No Technoloy specified'}
+                    </div>
                 </p>
-                {record.technologies.length > 0
-                    ? record.technologies.map((item, idx) => (
-                          <span key={idx} className={S.tech_item}>
-                              {item}
-                          </span>
-                      ))
-                    : 'No Technoloy specified'}
                 <p className={S.time}>
                     Timing: <span className={S.timing}>{record.time_from}</span>{' '}
                     to <span className={S.timing}>{record.time_to}</span>{' '}
                 </p>
                 <p className={S.exp}>
-                    Experience: <span>{record.experience}</span>
+                    Experience:{' '}
+                    <span>
+                        {record.experience
+                            ? // @ts-ignore
+                              expMap[record.experience]
+                            : '-'}
+                    </span>
                 </p>
             </div>
         </div>

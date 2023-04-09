@@ -70,16 +70,16 @@ button {
 .navbar a {
     text-decoration: none;
     font-size: 1.5rem;
-    font-weight: 500;
-    color: #999;
+    font-weight: 600;
+    color: #d85526a5;
 }
 
 .navbar a:hover {
-    color: #888;
+    color: #D85426;
 }
 
 .navbar a.active {
-    color: #333;
+    color: #D85426;
 }
 
 .logout {
