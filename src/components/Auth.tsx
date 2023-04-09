@@ -5,6 +5,7 @@ import { FcGoogle } from 'react-icons/fc'
 import { getUserState } from '../contexts/UserContext'
 import { signInWithPopup } from 'firebase/auth'
 import { collection, query, where, getDocs, addDoc } from 'firebase/firestore'
+import S from './Auth.module.css'
 
 type TProp = {}
 const Auth: FC<TProp> = () => {
@@ -61,21 +62,27 @@ const Auth: FC<TProp> = () => {
     }, [])
 
     return (
-        <div className="container flex-center">
-            <div>
-                <p
-                    style={{
-                        fontSize: '1.5rem',
-                        fontWeight: '500',
-                        marginBottom: '1rem',
-                    }}
-                >
-                    Login kar loude 😃👇
-                </p>
-                <button className="flex-center" onClick={handleLogin}>
-                    <FcGoogle />
-                    &nbsp; Login with Google
-                </button>
+        <div className={S.auth_page}>
+            <div className={`${S.circle} ${S.c1}`} style={{ bottom: 0 }} />
+            <div className={`${S.circle} ${S.c2}`} />
+            <div className={S.overlay} />
+            <div className="container flex-center">
+                <div className={S.auth_card}>
+                    <p
+                        style={{
+                            fontSize: '1.5rem',
+                            fontWeight: '600',
+                            marginBottom: '1rem',
+                            color: '#333',
+                        }}
+                    >
+                        Login kar Laude 😃👇
+                    </p>
+                    <button className="flex-center" onClick={handleLogin}>
+                        <FcGoogle />
+                        &nbsp; Login with Google
+                    </button>
+                </div>
             </div>
         </div>
     )
