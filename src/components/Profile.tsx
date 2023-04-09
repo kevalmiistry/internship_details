@@ -7,12 +7,12 @@ import {
     getDocs,
     query,
     setDoc,
-    updateDoc,
     where,
 } from 'firebase/firestore'
 import { AiOutlineClose } from 'react-icons/ai'
 import { getUserState } from '../contexts/UserContext'
 import { db } from '../config/firebase'
+import { MdClose } from 'react-icons/md'
 import InternshipCard from './InternshipCard'
 import Navbar from './Navbar'
 import S from './Profile.module.css'
@@ -86,10 +86,30 @@ const Profile: FC<TProp> = () => {
     }, [techItems])
 
     /*--------------------------------------------------------------*/
+    const [errMsg, setErrMsg] = useState('')
+    const validate = () => {
+        if (
+            formData.company_name &&
+            formData.experience &&
+            formData.internship_title &&
+            formData.stipend &&
+            formData.technologies &&
+            formData.time_from &&
+            formData.time_to
+        ) {
+            setErrMsg('')
+            return true
+        } else {
+            setErrMsg('Laude sab details bhar! 🤨')
+            return false
+        }
+    }
+
     const [submitting, setSubmitting] = useState(false)
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        if (!validate()) return
         try {
             const internsRef = collection(db, 'internships')
             setSubmitting(true)
@@ -146,19 +166,21 @@ const Profile: FC<TProp> = () => {
         <>
             <Navbar />
             <div className="container">
-                {userData?.internship && internshipDetails && !showForm ? (
-                    <>
-                        <InternshipCard
-                            key={internshipDetails.id}
-                            record={internshipDetails}
-                        />
-                        <button
-                            style={{ width: '100%', marginTop: '1rem' }}
-                            onClick={() => setShowForm(true)}
-                        >
-                            Update Details
-                        </button>
-                    </>
+                {userData?.internship && internshipDetails ? (
+                    !showForm && (
+                        <>
+                            <InternshipCard
+                                key={internshipDetails.id}
+                                record={internshipDetails}
+                            />
+                            <button
+                                className={S.open_update_btn}
+                                onClick={() => setShowForm(true)}
+                            >
+                                Update Details
+                            </button>
+                        </>
+                    )
                 ) : (
                     <div className="flex-center">
                         You haven't added your Internship details
@@ -166,12 +188,15 @@ const Profile: FC<TProp> = () => {
                 )}
                 {showForm && (
                     <div className={S.form_container}>
-                        {userData?.internship && internshipDetails && (
-                            <div style={{ textAlign: 'right' }}>
-                                <button onClick={handleFormClose}>Close</button>
-                            </div>
-                        )}
                         <form onSubmit={handleSubmit}>
+                            {userData?.internship && internshipDetails && (
+                                <div className={S.formclose_btn}>
+                                    <MdClose
+                                        size={'28px'}
+                                        onClick={handleFormClose}
+                                    />
+                                </div>
+                            )}
                             <label htmlFor="company_name">Company Name</label>
                             <input
                                 className="form_input"
@@ -204,7 +229,9 @@ const Profile: FC<TProp> = () => {
 
                             <label htmlFor="stipend">Technolgies:</label>
 
-                            <div className="flex items-center">
+                            <div
+                                className={`flex items-center ${S.techs_wrapper}`}
+                            >
                                 {Array.from(Array(techCounts), (e, idx) => (
                                     <div
                                         key={idx}
@@ -245,31 +272,36 @@ const Profile: FC<TProp> = () => {
                                 </button>
                             </div>
 
-                            <label htmlFor="time_from">Time From</label>
-                            <input
-                                className="form_input"
-                                type="text"
-                                name="time_from"
-                                id="time_from"
-                                onChange={handleOnChange}
-                                value={formData.time_from}
-                            />
-
-                            <label htmlFor="time_to">Time To</label>
-                            <input
-                                className="form_input"
-                                type="text"
-                                name="time_to"
-                                id="time_to"
-                                onChange={handleOnChange}
-                                value={formData.time_to}
-                            />
+                            <div className={S.time_wrapper}>
+                                <div className={S.one_time}>
+                                    <label htmlFor="time_from">Time From</label>
+                                    <input
+                                        className={`form_input ${S.timeput}`}
+                                        type="text"
+                                        name="time_from"
+                                        id="time_from"
+                                        onChange={handleOnChange}
+                                        value={formData.time_from}
+                                    />
+                                </div>
+                                <div className={S.one_time}>
+                                    <label htmlFor="time_to">Time To</label>
+                                    <input
+                                        className={`form_input ${S.timeput}`}
+                                        type="text"
+                                        name="time_to"
+                                        id="time_to"
+                                        onChange={handleOnChange}
+                                        value={formData.time_to}
+                                    />
+                                </div>
+                            </div>
 
                             <label htmlFor="experience">Experience</label>
                             <select
                                 name="experience"
                                 id="experience"
-                                className={S.experience}
+                                className={`form_input ${S.experience}`}
                                 onChange={(e) =>
                                     setFormData((prev) => ({
                                         ...prev,
@@ -312,6 +344,7 @@ const Profile: FC<TProp> = () => {
                                     ? 'Update!!!'
                                     : "Fuckin' Go!!!"}
                             </button>
+                            <p className={S.red}>{errMsg}</p>
                         </form>
                     </div>
                 )}

@@ -3,6 +3,15 @@
     max-width: 600px;
     display: flex;
     flex-direction: column;
+    padding-bottom: 5rem;
+    border: 2px solid #777;
+    padding: 1rem;
+    border-radius: 1rem;
+    padding-bottom: 3rem;
+}
+
+.formclose_btn {
+    text-align: right;
 }
 
 .add_btn {
@@ -51,4 +60,43 @@
     padding: 0.8rem 1rem;
     border-radius: 0.75rem;
     border: 1px solid red;
+}
+
+.open_update_btn {
+    background-color: #D85426;
+    width: calc(100% - 2rem) !important;
+    margin-inline: auto;
+    display: block;
+    margin-top: 1rem;
+    font-weight: 400;
+    color: #fff;
+}
+
+.techs_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.time_wrapper {
+    display: flex;
+    gap: 1rem;
+}
+
+.one_time {
+    flex: 1;
+    /* border: 1px solid red; */
+}
+
+.one_time .timeput {
+    width: 100% !important;
+}
+
+.red {
+    color: #D85426;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    .form_container form {
+        width: 95vw;
+    }
 }
