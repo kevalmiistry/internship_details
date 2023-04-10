@@ -38,7 +38,7 @@ const Auth: FC<TProp> = () => {
                 name: result.user.displayName,
                 profile_pic: result.user.photoURL,
                 email: result.user.email,
-                internship: arr[0].internship,
+                internship: arr.length > 0 ? arr[0].internship : false,
             })
             localStorage.setItem(
                 'g-user',
@@ -47,7 +47,7 @@ const Auth: FC<TProp> = () => {
                     photoURL: result.user.photoURL,
                     email: result.user.email,
                     uid: result.user.uid,
-                    internship: arr[0].internship,
+                    internship: arr.length > 0 ? arr[0].internship : false,
                 })
             )
             navigate('/')
